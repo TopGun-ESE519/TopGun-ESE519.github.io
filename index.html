@@ -322,15 +322,15 @@ initComparisons();
   <div class="row">
        <h1 class="text" style="text-align: center;">  Project Details </h1>
      <div class="Column">
-        <p> 1. The game can be visualized as a grid of pixels. The jet and missiles are genereated from a set of pixels. </p>
-  <p> 2. When the game begins, the jet appears whose initial position is the center of the left end. At the same time, seven missles are fired from the right end of the screen moving towards the left end. </p>
-  <p> 3. The missiles only move forward along their horizontal axis and their vertical coords remains the same. Whereas, the jet the free to move in any direction with use of joystick placing the entire control in the hands of the user. </p>
-  <p> 4. One loop accounts for one forward movement of the missile (the missile will jump some pixels on the grid depending upon it's speed). The loops will continue until the missile's face reaches the left end. After that the missile will be regenerated again at the right end and this algorithm works independently for each missile. </p>
-  <p> 5. Every missile moves at a random speed which depends upon the random number generated at the start of each loop. </p>
-  <p> 6. Dimensions of missile and jet are 30x17 pixels. The wings size differ for both, 10 pixels for jet and </p>
-   <p> 5 pixels for missile. With one adc movement the jet moves 15 pixels according to the command. The adc instructions are given after every loop. </p>
-  <p> 7. At the end of every loop the algorithm checks if the pixels of jet overlaps with the pixels of missiles i.e if there is a crash. If this happens then the jet is crashed and "Game Over" message is dispayed. If the user surfs successfully through the screen then they win the game. A computationally efficient logic is implemented for crash check, avoiding any lags, which will be expained in a latter section. </p>
-  <p> 8. An audio is added for enhancing the user experience. </p>
+        <p class="text"> 1. The game can be visualized as a grid of pixels. The jet and missiles are genereated from a set of pixels. </p>
+  <p class="text"> 2. When the game begins, the jet appears whose initial position is the center of the left end. At the same time, seven missles are fired from the right end of the screen moving towards the left end. </p>
+  <p class="text"> 3. The missiles only move forward along their horizontal axis and their vertical coords remains the same. Whereas, the jet the free to move in any direction with use of joystick placing the entire control in the hands of the user. </p>
+  <p class="text"> 4. One loop accounts for one forward movement of the missile (the missile will jump some pixels on the grid depending upon it's speed). The loops will continue until the missile's face reaches the left end. After that the missile will be regenerated again at the right end and this algorithm works independently for each missile. </p>
+  <p class="text"> 5. Every missile moves at a random speed which depends upon the random number generated at the start of each loop. </p>
+  <p class="text"> 6. Dimensions of missile and jet are 30x17 pixels. The wings size differ for both, 10 pixels for jet and </p>
+   <p class="text"> 5 pixels for missile. With one adc movement the jet moves 15 pixels according to the command. The adc instructions are given after every loop. </p>
+  <p class="text"> 7. At the end of every loop the algorithm checks if the pixels of jet overlaps with the pixels of missiles i.e if there is a crash. If this happens then the jet is crashed and "Game Over" message is dispayed. If the user surfs successfully through the screen then they win the game. A computationally efficient logic is implemented for crash check, avoiding any lags, which will be expained in a latter section. </p>
+  <p class="text"> 8. An audio is added for enhancing the user experience. </p>
      </div>
      <div class="Column">
         <img src="Images/vision_1.JPG" width="450" height="250" style="padding-left: 100px;">
