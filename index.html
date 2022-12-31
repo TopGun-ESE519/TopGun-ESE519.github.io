@@ -339,25 +339,20 @@ initComparisons();
 </div>
 </div>
 
+  <h2> Project instructions for someone who would like to re-create our project</h2>
  
-  <h2> Project Details </h2>
+  <h3> Project Details </h3>
   <p> 1. The game can be visualized as a grid of pixels. The jet and missiles are genereated from a set of pixels. </p>
   <p> 2. When the game begins, the jet appears whose initial position is the center of the left end. At the same time, seven missles are fired from the right end of the screen moving towards the left end. </p>
   <p> 3. The missiles only move forward along their horizontal axis and their vertical coords remains the same. Whereas, the jet the free to move in any direction with use of joystick placing the entire control in the hands of the user. </p>
   <p> 4. One loop accounts for one forward movement of the missile (the missile will jump some pixels on the grid depending upon it's speed). The loops will continue until the missile's face reaches the left end. After that the missile will be regenerated again at the right end and this algorithm works independently for each missile. </p>
   <p> 5. Every missile moves at a random speed which depends upon the random number generated at the start of each loop. 
-  <p> 6. Dimensions of missile and jet are 30x17 pixels. The wings size differ for both, 10 pixels for jet and 
-    5 pixels for missile. With one adc movement the jet moves 15 pixels according to the command. The adc instructions are given after every loop. </p>
+  <p> 6. Dimensions of missile and jet are 30x17 pixels. The wings size differ for both, 10 pixels for jet and 5 pixels for missile. With one adc movement the jet moves 15 pixels according to the command. The adc instructions are given after every loop. </p>
   <p> 7. At the end of every loop the algorithm checks if the pixels of jet overlaps with the pixels of missiles i.e if there is a crash. If this happens then the jet is crashed and "Game Over" message is dispayed. If the user surfs successfully through the screen then they win the game. A computationally efficient logic is implemented for crash check, avoiding any lags, which will be expained in a latter section. </p>
   <p> 8. An audio is added for enhancing the user experience. </p>
   
-  <h2> Issues and identified solutions </h2>
-  <p> 1. VGA cable connections: We faced issues with VGA cable connections made using jumper wires. The code was running properly but the color display on VGA wasn’t accurate. We were not able to fill the pixels with black color. This issue was tackled using VGA socket which kinda fixed the jumper wires and display was much clearer than previous. The problem was probably due to loose connections of jumper wires.</p>
-  <p> 2. Issue with Pico4ml: Pico4ml has an inbuilt camera which can be accessed for point-tracking tasks. We successfully ran the code and captured images using the board. But when we tried running our code on Pico4ml board, it didn’t work. The motion of the missiles wasn’t continuous and it ran only for 7 loops before abruptly stopping. Decreasing the computation work by reducing the number of missiles resulted in code running for 11 loops. With this results we can conclude that the board couldn’t handle the load. Another reason could be with PIO instructions. As the VGA was running on PIO, probably some changes are required in the file when the Pico4ml is used. Due to time restrictions we were not able to explore this possibility. </p>
-  <p> 3. Crash Detection issue: Pixel by pixel mapping of jet and missiles one by one between every two ADC commands would be extremely inefficient process. The board may not be able to sustain such a computational load and even if it does there will a huge lag in the operations. So we have developed simpler but sufficiently accurate algorithm for crash detection. Now note that the position of missiles on the vertical line are always fixed. So, the entire system is designed in a way that for any given jet position there will be two missiles in the range of jet with which the probability of crashing is there. We just check if the cords of the tip of missiles have crossed the tip of jet. Then, by design, the jet must have crossed through the missile and that means a crash has taken place. So, the algorithm shortlists the missiles in the range and then checks for crash by point mapping.</p>
   
-  
-   <h2> Components used </h2>
+   <h3> Components used </h3>
   <p> 1. Raspberry Pi Pico: Raspberry Pi Pico is a low-cost, high-performance microcontroller board with flexible digital interfaces. It has Dual-core Arm Cortex M0+ processor, flexible clock running up to 133 MHz, 264 kB of SRAM,  2 MB of on-board flash memory, 26 × multi-function GPIO pins, 2 × SPI, 2 × I2C, 2 × UART, 3 × 12-bit ADC, 16 × controllable PWM channels, 8 × Programmable I/O (PIO) state machines for custom peripheral support. We have utilized 5 digital pins for VGA display, 2 analog pins for the joystick's X & Y values and a PWM pin for the speaker.</p>
   <p> 2. Joystick module: Similar to the "analog" joysticks on PS2 (PlayStation 2) controllers, this JoyStick Module PS2 Breakout Sensor is used. Two potentiometers, one for each axis, are all that are needed to move in one direction. Pots cost 10,000 each. The select button on this joystick is activated when the joystick is depressed. By moving the "hat," we use this Joystick Module to measure position coordinates on the X and Y axes. Additionally, it has a switch that may be operated by pushing the hat just  like the Xbox controller in style. Two 10k potentiometers on the X and Y axes produce analog data to regulate 2D movement. Two analog values that represent two directions will be output by the module when it is in operating mode. The value that can be read from the analog pin of this module, which operates on a 5V power supply, is approximately 2.5V. As the joystick is moved, the value rises to a maximum of 5V; otherwise, it falls to 0V.</p>
   <p> 3. VGA display: VGA (Video Graphics Array) is an analog interface between a PC and monitor that was widely used prior to DVI, HDMI and DisplayPort. In 1987, the IBM PS/2 line of computers launched the Video Graphics Array (VGA), a video display controller and associated de facto graphics standard that quickly spread throughout the PC industry. The phrase can now be used to describe the 640x480 resolution feature of the VGA hardware, the computer display standard, or the 15-pin D-subminiature VGA connector.</p>
@@ -365,27 +360,87 @@ initComparisons();
   <p> 5. Jumper wires: An electrical wire, or group of them in a cable, with a connector or pin at each end (or sometimes without them - simply "tinned") is known as a jump wire (also known as a jumper, jumper wire, or DuPont wire), and it is typically used to connect the parts of a breadboard or other prototype or test circuit, internally or with other machinery or components, without soldering. A breadboard, a circuit board's header connector, or a piece of test equipment can all be used to create slots for the "end connectors" that hold individual jump wires.<p>
   <p> 6. Adafruit STEMMA Speaker: We can quickly and safely connect sensors and devices with Adafruit STEMMA boards, such as this STEMMA Speaker - Plug and Play Audio Amplifier. It includes a small 1 Watt 8 ohm speaker and a class D audio amplifier. It is simple to set up because all we require is ground, 3 to 5V of power, and an audio signal. The audio signal can go up to the power pin voltage without needing to be AC linked (3 or 5V peak-to-peak). The volume may be changed with a little screwdriver, and the sound quality is enough for music, tones, and voice.<p>
   
-  <h2> HARDWARE CONNECTIONS</h2>
+  <h3> HARDWARE CONNECTIONS</h3>
  
-<h3> RPi Pico with VGA connector </h3>
-<p> RP2040 GPIO 16 ---> VGA Hsync<p> 
-<p> RP2040 GPIO 17 ---> VGA Vsync<p>
-<p> RP2040 GPIO 18 ---> 330 ohm resistor ---> VGA Red<p>
-<p> RP2040 GPIO 19 ---> 330 ohm resistor ---> VGA Green<p>
-<p> RP2040 GPIO 20 ---> 330 ohm resistor ---> VGA Blue<p>
-<p> RP2040 GND ---> VGA GND<p>
+  <h4> RPi Pico with VGA connector </h4>
+  <p> RP2040 GPIO 16 ---> VGA Hsync<p> 
+  <p> RP2040 GPIO 17 ---> VGA Vsync<p>
+  <p> RP2040 GPIO 18 ---> 330 ohm resistor ---> VGA Red<p>
+  <p> RP2040 GPIO 19 ---> 330 ohm resistor ---> VGA Green<p>
+  <p> RP2040 GPIO 20 ---> 330 ohm resistor ---> VGA Blue<p>
+  <p> RP2040 GND ---> VGA GND<p>
  
-<h3> RPi Pico with joystick module: </h3>
-<p> RP2040 GND ---> Joystick GND<p>
-<p> RP2040 3.3v ---> Joystick 5v<p>
-<p> RP2040 pin 26  ---> Joystick VRx<p>
-<p> RP2040 pin 27  ---> Joystick VRy<p>
+  <h4> RPi Pico with joystick module: </h4>
+  <p> RP2040 GND ---> Joystick GND<p>
+  <p> RP2040 3.3v ---> Joystick 5v<p>
+  <p> RP2040 pin 26  ---> Joystick VRx<p>
+  <p> RP2040 pin 27  ---> Joystick VRy<p>
  
-<h3> RPi Pico with speaker: </h3>
-<p> RP2040 GND ---> Speaker GND<p>
-<p> RP2040 3.3v ---> Speaker 3.3v<p>
-<p> RP2040 pin 28  ---> Speaker signal pin<p>
-
+  <h4> RPi Pico with speaker: </h4>
+  <p> RP2040 GND ---> Speaker GND<p>
+  <p> RP2040 3.3v ---> Speaker 3.3v<p>
+  <p> RP2040 pin 28  ---> Speaker signal pin<p>
   
+  <h3>Block diagram of the project </h3>
+  <p> Add block diagram <p>
+  
+  <h3> Links to code</h3>
+  <p> https://github.com/TopGun-ESE519/TopGun-ESE519.github.io/tree/main/Code <p>
+  
+  <h2> Issues and identified solutions </h2>
+  <p> 1. VGA cable connections: We faced issues with VGA cable connections made using jumper wires. The code was running properly but the color display on VGA wasn’t accurate. We were not able to fill the pixels with black color. This issue was tackled using VGA socket which kinda fixed the jumper wires and display was much clearer than previous. The problem was probably due to loose connections of jumper wires.</p>
+  <p> 2. Issue with Pico4ml: Pico4ml has an inbuilt camera which can be accessed for point-tracking tasks. We successfully ran the code and captured images using the board. But when we tried running our code on Pico4ml board, it didn’t work. The motion of the missiles wasn’t continuous and it ran only for 7 loops before abruptly stopping. Decreasing the computation work by reducing the number of missiles resulted in code running for 11 loops. With this results we can conclude that the board couldn’t handle the load. Another reason could be with PIO instructions. As the VGA was running on PIO, probably some changes are required in the file when the Pico4ml is used. Due to time restrictions we were not able to explore this possibility. </p>
+  <p> 3. Crash Detection issue: Pixel by pixel mapping of jet and missiles one by one between every two ADC commands would be extremely inefficient process. The board may not be able to sustain such a computational load and even if it does there will a huge lag in the operations. So we have developed simpler but sufficiently accurate algorithm for crash detection. Now note that the position of missiles on the vertical line are always fixed. So, the entire system is designed in a way that for any given jet position there will be two missiles in the range of jet with which the probability of crashing is there. We just check if the cords of the tip of missiles have crossed the tip of jet. Then, by design, the jet must have crossed through the missile and that means a crash has taken place. So, the algorithm shortlists the missiles in the range and then checks for crash by point mapping.</p>
+  
+  <h2> Overview of our project's development : How it evolved from proposal to demo day</h2>
+  
+  <p> 1. We first tried the missile and fighter jet simulation on a TFT display using the I2C communication protocol. We were able to move the fighter jet using a joystick module.
+   A variation of a liquid crystal display known as a thin-film-transistor liquid-crystal display (TFT LCD) uses thin-film transistor technology to enhance visual properties like addressability and contrast. In contrast to passive matrix LCDs and simple, direct-driven (i.e., with segments directly connected to electronics outside the LCD) LCDs with a few segments, a TFT LCD is an active matrix LCD.
+   TFT LCDs are utilized in a variety of appliances, including televisions, computer displays, handheld gadgets, mobile phones, video game consoles, PDAs, navigational systems, and car dashboards.<p>
+ 
+  <p> 2. But as it was slow and the display was too small, we switched to a VGA display. We used PIO to draw pixels on the VGA display which made the process a lot faster. The TFT display had resolution of 160*80 pixels whereas the VGA display  has 640*480 resolution characteristic of the VGA hardware.<p>
+
+  <p> 3. Then we added a speaker to enhance user experience.The speaker continues to play the sound track throughout the game. <p>
+ 
+  <p> 4. Soldered the componentes on a general purpose PCB. This solved our problems of having loose connections that lead to inaccurate working of the VGA display.<p>
+  
+  <p> 5. We then added a feature of path detection which suggests the direction  in which the fighter jet should move based on the current position of missiles.<p>
+  
+  <p1> A. Path detection- No path: When missiles are present both below and above  the fighter jet, it can’t move in both directions. Therefore, the algorithm won’t suggest any path.</p1>
+  
+  <p1> B. Path detection - Upward path:When there’s a missile present below the fighter jet, it ideally should move in upward direction. Therefore, the algorithm will suggest a path in the upward direction.</p1>
+  
+  <p1> C. Path detection - Downward path: When there’s a missile present above the fighter jet, it ideally should move in downward direction. Therefore, the algorithm will suggest a path in the downward direction.</p1>
+  
+  <p> 6. When the fighter jet crashes with any of the game the game terminates with a message “Game over on the screen”.<p>
+  
+  <p> 7. Player who successfully moves the fighter jet to reach the right end wins the game.<p>
+  
+  <p> 8. We then added a replay button that will start a new game after the player loses or wins the previous game.<p>
+ 
+ 
+  
+  <h2> Reflections on your design and components we have selected : Advantages/Disadvantages </h2>
+  <h3> Using VGA display rather than TFT display gave use 2 advantages:</h3> 
+  <p> 1. Bigger screen:  The TFT display had resolution of 160*80 pixels whereas the VGA display  has 640*480 resolution characteristic of the VGA hardware.<p> 
+  <p> 2. Faster processing: Increase in the speed of drawing shapes because of the utilization of PIO.<p> 
+  
+   <h3> Other design approaches/components we might try next time.</h3> 
+   <p> 1. Instead of a joystick, gesture sensors can be used.<p>
+   <p> 2. Different sound tracks can be used at different events such as game over, new game, or when the player wins the game.<p>
+
+  <h2> feature or accomplishment we have found particularly satisfying.</h2>
+
+  <p> 1. Sound effect enhanced the interest of the player and made the game more fascinating.<p>
+  <p> 2. Utilizing PIO made the entire game a lot faster than it was previously.<p>
+  
+  <h2> Explanation of the PIO part of our code </h2>
+  <p> When it comes to interacting with the display and choosing the temporal and spatial positioning of pixels, the HSYNC and VSYNC signals are crucial. The first determines when a new row of pixels should be shown, while the second determines when a new frame must be loaded. The PIO module on the RP2040, which operates at a clock speed of 25MHz, is responsible for controlling everything. The entire protocol can be briefly summarized as follows:<p>
+  <p> 1. As previously mentioned, our display has a resolution of 640x480, hence the HSYNC signal, also known as horizontal sync, must be high for 640 clock cycles.<p> 
+  <p> 2. Our HSYNC signal starts off as HIGH and is active-high. Every clock cycle during this time, the R, G, and B pins are set to various voltages between 0 and 0.7V.<p> 
+  <p> 3. The HSYNC enters its front porch once a row of pixels is finished, at which point it enters a LOW state for 16 clock cycles. Similar to how it operates in the figure above, it then moves on to the sync Pulse and back porch portion of the protocol.<p> 
+  <p> 4. However, as was already said, the frame is controlled by the VSYNC (vertical sync). Therefore, the VSYNC remains HIGH for the whole HSYNC action.<p> 
+  <p> 5. The VSYNC signal also consists of a front porch, sync pulse, and back porch. It functions in accordance with the figure shown above, remaining in a HIGH state for a front porch of 10 lines (the length of time required for the HSYNC signal to cycle through 10 rows), and so on.<p>
+
 </body>
 </html>
